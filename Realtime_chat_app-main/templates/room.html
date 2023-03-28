@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Realtime Chat</title>
+    <link rel="stylesheet" href="{% static 'styles_1.css' %}">
+    <script 
+        src="https://code.jquery.com/jquery-3.1.1.min.js" 
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   
+        crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+
+<div align="center">
+    <h1>Realtime Chat App</h1>
+    <h2 align="left"> Room Name: {{room}} </h2>
+    <h2 align="left"> User Name: {{username}} </h2>
+</div>
+
+<div id="display"></div>
+
+<script type="text/javascript">
+    var user_name = "{{username}}";
+    var url = '/getMessages/{{room}}/';
+</script>
+<script src="{% static 'index_2.js' %}"></script>
+
+<div class="container">
+    <link rel="stylesheet" href="{% static 'styles_2.css' %}">
+    <form id="post-form">
+        {% csrf_token %}
+        <input type="hidden" name="username" id="username" value="{{username}}"/>
+        <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}"/>
+        <input type="text" name="message" id="message" width="100px" />
+        <input type="submit" value="Send">
+    </form>
+</div>
+</body>
+
+<script type="text/javascript" src="{% static 'index_1.js' %}"></script>
+
+</html>
